@@ -1,0 +1,438 @@
+---
+title: "Mini Project 3 by Maria Alexandra Jerez"
+editor: visual
+format: html
+cache: true
+---
+
+![U.S. ELECTIONS](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIS36rmTeaILmvpMwYU7LUpQeXuWyBMH7Mg&s)
+
+### INTRO
+
+For this project we will be diving into politics and voter allocations. We have a snap of magnificent data on politics, and boy will you be blown away. Let's dive into it....
+
+We will start with opening all libraries needed and creating the main directory, sub-directory, my directory, and a folder to store data files. Here is the code we will use to accomplish this:
+
+```{r  DIRECTORY CODE, message = FALSE, warning=FALSE, collapse=TRUE}
+
+library(tidyverse) # includes: ggplot2, tidyr, dplyr, readr, purrr, tibble, stringr, forcats 
+library(utils)
+library(sf)
+library(httr) 
+library(fs)
+library(plyr)
+
+#define main directory
+  main_dir <- "/Users/mariajerez/Documents/GitHub"
+  
+#define sub directory
+  sub_dir <- "STA9750-2024-FALL"
+  
+#define directory
+  my_directory <- file.path(main_dir, sub_dir)
+  
+```
+
+For our ***first Task***, we will be downloading a set of files. Here is the code we will use to accomplish the task:
+
+```{r  DOWNLOAD1 CODE, warning=FALSE, message = FALSE, collapse=TRUE  }
+
+# create a house data file - file dowloaded manually and saved to directory 
+setwd(my_directory)  
+House <- read.csv("1976_2022_house.csv")
+  
+# create a president data file - file dowloaded manually and saved to directory 
+  President <- read.csv("1976_2020_president.csv")
+  
+#Download files districts94-112 - auto load a .zip file from directly from the URL
+  download_zip_files_CD <- 
+      download.file("https://cdmaps.polisci.ucla.edu/shp/districts094.zip", 
+                destfile = "districts094.zip" , mode='wb')
+
+```
+
+For our ***second task***, we will be auto downloading congressional shapefiles from Census Beaurue. Here is the code used to accomplished this task:
+
+```{r  DOWNLOAD2 CODE, eval = FALSE, echo=FALSE, results = 'hide', warning=FALSE, message = FALSE, collapse=TRUE  }
+
+#Auto dowload census files
+setwd("/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/census_shapefiles")
+
+# Define base URL and file name pattern
+census_url <- "http://www2.census.gov/geo/tiger/TIGER2024/CD/"
+
+# Generate file names for download
+file_name <- sprintf("t1_2024_%02d_cd119.zip", 1:78)  # This generates a vector of file names
+
+# Create the full URLs
+FILE_URL <- paste0(census_url, file_name)
+
+# Loop through each URL and download the corresponding file
+for (i in 1:length(FILE_URL)) {
+  download.file(FILE_URL[i], destfile = file_name[i], method = "curl")
+  cat("Downloaded:", file_name[i], "\n")  # Optional: prints which file is being downloaded
+}
+```
+
+### **Initial Exploration of Vote Count Data**
+
+For our ***third task*** we will be exploring the vote count data and answering a few questions below using the \[*MIT Election Data Science Lab\] (*<https://electionlab.mit.edu/>*)* data sources.
+
+1.  Which states have gained and lost the most seats in the US House of Representatives between 1976 and 2022? \[House data source\](<https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2>)
+
+If we take the argument that *an increase in voters increases house seats*. Then we can conclude, from our data, that no state has lost seats from 1976-2022, as total votes for each state has increased over time. Below we will see a graph of such results for all states, with the exception of West Virginia, where we see a stale pattern through the years.
+
+```{r HOUSE CODE, echo=FALSE, include=FALSE, warning=FALSE, results='hide', message = FALSE, collapse=TRUE}
+
+#Creating a data frame to view votes through the years by state 
+  house_seats <- House |>
+    select(year, state, party, candidate, district, candidatevotes) |>
+    filter(year >= 1976, !is.na(candidatevotes), !is.na(party)) |>
+    group_by(year,state) |>
+    arrange(year) 
+
+#pivot the data frame into a long format
+  house_seats  %>% pivot_longer(cols = c('year', 'candidatevotes'),
+                    names_to = 'year',
+                    values_to = 'candidatevotes')
+
+```
+
+```{r HOUSE1 CODE, echo=FALSE, include=FALSE, warning=FALSE, message = FALSE, collapse=TRUE}
+
+library(ggplot2)
+library(geomtextpath)
+library(hrbrthemes)
+library(gghighlight)
+library(viridis)
+
+#Plot
+house_seats  %>% 
+  ggplot(aes(x = year, y = candidatevotes, color = state)) +
+  geom_line() +
+  scale_fill_viridis(discrete = TRUE) +
+  theme(legend.position = "none") +
+  ggtitle("State votes through the years") +
+  theme_ipsum() +
+  theme(
+    legend.position = "none",
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 8)
+  ) +
+  facet_wrap(~state, scale = "free_y")
+
+print(house_seats)
+```
+
+```{r}
+print(house_seats)
+```
+
+Let's look at the following scenario for question 2:
+
+*"New York State has a unique “fusion” voting system where one candidate can appear on multiple “lines” on the ballot and their vote counts are totaled. For instance, in 2022, Jerrold Nadler appeared on both the Democrat and Working Families party lines for NYS’ 12th Congressional District. He received 200,890 votes total (184,872 as a Democrat and 16,018 as WFP), easily defeating Michael Zumbluskas, who received 44,173 votes across three party lines (Republican, Conservative, and Parent). "*
+
+2.  Are there any elections in our data where the election would have had a different outcome if the “fusion” system was not used and candidates only received the votes their received from their “major party line” (Democrat or Republican) and not their total number of votes across all lines?
+
+Based on the data, New York and Connecticut follow a "fusion" system. For this analysis, if the 'percent of total votes' for each candidate is \> 50% on that year, than we can conclude that candidate as the winner. However, we will look closer at candidates that have won with a margin of +-.5% points from 50% ,\[according to AP winner call\](<https://www.ap.org/elections/our-role/how-we-call-races/>) +-.5% margin is considered 'too close to call"; too small a difference to win, and because a candidate won under a "fusion" system (votes for representation of 2 or more parties on ballot), we can conclude that there could have been a possibility for the opposing candidate to win if only one party's votes (not multiples) was counted for the winner.
+
+The table extracted from code below, provides us a list of candidates winning at 50%+, from which we look at the 51% winners as their vote count ranges from 50.5-51%, rounded to 51%; to close to call.
+
+```{r HOUSE WINNER CODE, results='hide', warning=FALSE, message = FALSE, collapse=TRUE}
+
+#WINNER IF VOTES > 50% 
+  house_candidate_fusion <- House |>
+    filter(fusion_ticket == "TRUE", !is.na(party),!is.na(candidate), !is.na(year) ) |> 
+    group_by(year, candidate)|>
+    mutate(percentoftotalvotes = round((candidatevotes/totalvotes*100), 2)) |>
+    select(year, candidate, percentoftotalvotes, party) |>
+    arrange(year) 
+
+```
+
+```{r HOUSE WINNER CODE PRINT, warning=FALSE, message = FALSE, collapse=TRUE}
+
+# TABLE
+library(DT)
+datatable(house_candidate_fusion, caption = "Fusion Votes by Candidate and Year")
+```
+
+For our **fourth task** we will be creating a code to automatically extract a '.shp' file from a zip folder and reading to r. The code below will accomplish this task:
+
+```{r EXTRACT SHP AUTO CODE, echo=FALSE, include=FALSE, cache = TRUE, results='hide', warning=FALSE, message = FALSE, echo=FALSE}
+
+# CD files - UNZIP folder and extract/read .shp files 
+# unzip the zip folders for CD
+  cd_dir <- "/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/data_CD/cd_dir"
+  zipF <- list.files(path = "/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/data_CD", pattern = "*.zip", full.names = TRUE)
+
+# unzip all your files
+  ldply(.data = zipF, .fun = unzip, exdir = cd_dir)
+
+# List all shapefiles (.shp) in the extracted folder
+  cd_file_dir <- "/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/data_CD/cd_dir/districtShapes"
+  shapefiles_cd <- list.files(cd_file_dir, pattern = "\\.shp$", full.names = TRUE)
+
+# Load all shapefiles into a list (you can load each shapefile as an sf object)
+  shapefiles_list_cd <- lapply(shapefiles_cd, function(file1) {
+  # Read shapefile
+  shp1 <- st_read(file1)
+  
+  # Transform CRS to 4326
+  st_transform(shp1, crs = 4326)
+})
+
+# Combine all shapefiles into one sf object
+ combined_shapefile_cd <- do.call(rbind, shapefiles_list_cd) 
+
+
+
+#CENSUS files - UNZIP folder and extract/read .shp files
+# get all the zip files
+  zipF_census <- list.files(path = "/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/census_shapefiles", pattern = "*.zip", full.names = TRUE)
+  
+# unzip all your files
+  ldply(.data = zipF_census, .fun = unzip, exdir = my_directory)
+  
+# List all shapefiles (.shp) in the extracted folder
+  shapefiles_census <- list.files(my_directory, pattern = "\\.shp$", full.names = TRUE)
+  
+# Load all shapefiles into a list (you can load each shapefile as an sf object)
+  shapefiles_list_census <- lapply(shapefiles_census, function(file) {
+    # Read shapefile
+    shp <- st_read(file)
+    
+# Transform CRS to 4326
+    st_transform(shp, crs = 4326)
+  })
+  
+# Combine all shapefiles into one sf object - error = numbers of columns of arguments do not match 
+  combined_shapefile_census <- do.call(rbind, shapefiles_list_census)
+
+  
+```
+
+#### **Visualization of the 2000 Presidential Election Electoral College Results**
+
+For our **fifth task** we will now look at the winner for the 2000 elections.
+
+```{r  PRESIDENT WINNER CODE, echo=FALSE, cache = TRUE, warning=FALSE, message = FALSE, results = "hide" , collapse=TRUE}
+
+#Mapping WINNING Party
+# Filtering President data to get only what we want to map 
+  winner_2000 <- President %>%
+    filter(year == 2000) %>%
+    group_by(state) %>%
+    top_n(1, candidatevotes) %>%
+    select(state, candidate, candidatevotes, party_simplified) 
+ 
+
+#Rename STATENAME to state on shapefile
+  combined_shapefile_cd <- combined_shapefile_cd |>
+    select(state = 1, everything()) 
+
+
+#Join the President data and shapefiles to CD
+  Shape_2000 <- combined_shapefile_cd %>%
+    mutate(state = toupper(trimws(state))) %>%  # Clean 'state' column in    combined_shapefile_cd
+    left_join(winner_2000 %>% 
+              mutate(state = toupper(trimws(state))),  # Clean 'state' column in president2000
+            by = "state")  # Join on 'state' column
+
+```
+
+```{r  PRESIDENT WINNER CODE PLOT, cache=TRUE, warning=FALSE , collapse=TRUE }
+  Winner2000_plot <- ggplot(Shape_2000, aes(geometry = geometry, fill = party_simplified),
+                     color = "black") +
+    geom_sf() + 
+    scale_fill_manual(values = c("REPUBLICAN" = "firebrick2", "DEMOCRAT" = "royalblue2")) +
+    theme_minimal() +
+    coord_sf(xlim = c(-180, -50), ylim = c(10,80), expand = FALSE) +
+    labs(title = "2000 Presidential Election", fill = "WINNING Party")
+ 
+```
+
+```{r collapse=TRUE}
+print(Winner2000_plot)
+
+```
+
+#### **Advanced Chloropleth Visualization of Electoral College Results**
+
+For our **sixth task** we will look at a more advanced map of the results, below:
+
+```{r PRESIDENT OVER YEAR CODE, echo=FALSE, cache=TRUE, warning=FALSE, message = FALSE, results = "hide" }
+
+# # Map election results over time
+# Clean up state names in both datasets
+winner_allyears <- President %>%
+  filter(year >= 1976 & year <= 2020) %>%
+  group_by(year, state) %>%
+  top_n(1, candidatevotes) %>%
+  select(year, state, candidate, candidatevotes, party_simplified) %>%
+  mutate(state = toupper(trimws(state)))  # Standardize 'state' column
+
+# Clean up the state names and join the data with the shapefile
+combined_shapefile_cd <- combined_shapefile_cd %>%
+  select(state = 1, everything()) %>%  # Renaming the state column
+  mutate(state = toupper(trimws(state)))  # Clean 'state' column
+
+
+saveRDS(winner_allyears, "winner_allyears.rds")
+winner_allyears <- readRDS("winner_allyears.rds")
+
+
+```
+
+```{r  PRESIDENT OVER YEAR CODE continued, eval=FALSE, cache = TRUE, warning=FALSE, message = FALSE, results = "hide"}
+#computer does not support running this - to much memory usage and can not run. 
+#Merge the datasets
+Shape_allyears <- combined_shapefile_cd %>%
+  left_join(winner_allyears, by = "state", relationship = "many-to-many")  # Join on the 'state' column
+
+# Inspect the merged dataset
+head(Shape_allyears, n = 1)
+
+# Plot the election results over time
+library(ggplot2)
+library(sf)  # 'combined_shapefile_cd' is an sf object
+
+# Plotting the faceted map
+Shape_allyears_plot  <- ggplot(data = Shape_allyears) +
+  geom_sf(aes(geometry = geometry, fill = party_simplified), color = "black", size = 0.1) +
+  facet_wrap(~year) +
+  scale_fill_manual(values = c( "DEMOCRAT" = "blue", "REPUBLICAN" = "red")) +  # Customize colors for parties
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(title = "U.S. Election Results by State (1976-2020)",
+       fill = "Party",
+       subtitle = "Faceted by Year")
+
+print(Shape_allyears_plot)
+
+#computer memory is bad, have to save file instead of viewing 
+ggsave("election_results_map.png", Shape_allyears_plot, width = 12, height = 8, dpi = 300)
+
+
+```
+
+#### **Effects of ECV Allocation Rules**
+
+We will now look at some approaches for Electoral College Vote distribution:
+
+1.  State-Wide Winner-Take-All
+
+    For "Winner-take-all" we took the [*"U.S. President data 1976-2020"*](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/42MVDX) from Harvard database and compared to an actual_winner created excel file \[researched president Winner by year, by state from 1976-2020\]. We extracted the winning party and candidate from the Harvard data, by pulling the max/winning votes for each state, year; in other words, the candidate with most votes a state for a specific year takes all winning Electoral College Votes. Similarly, we take researched winner_actual data, to compare, which gives us the candidate and party that actually won. Hence, everything highlighted in green means, YES, the actual and analyzed winning party reflects a "Winner-take-all" approach. We do however have one outlier in 1980, New York, where max votes point to the opposite party as winner, hence not following a winner take all.
+
+    ```{r WINNER TAKE-ALL CODE, warning=FALSE, message = FALSE, collapse=TRUE }
+    #Data WINNING PARTY by year and state
+    winner_allyears <- President %>%
+      filter(year >= 1976 & year <= 2020) %>%
+      group_by(year, state) %>%
+      top_n(1, candidatevotes) %>%
+      select(year, state, candidate, candidatevotes, party_simplified) %>%
+      mutate(state = toupper(trimws(state)))
+
+    #Actual winner data 
+    library("readxl")
+    actual_winner <- read_excel("/Users/mariajerez/Documents/GitHub/STA9750-2024-FALL/Winning Party by State_Original.xls") |>
+      mutate(year = as.integer(year)) 
+
+    #Standarize state bacause one is upper case and other is lower case 
+    actual_winner$state <- toupper(actual_winner$state)
+    winner_allyears$state <- toupper(winner_allyears$state)
+
+    # Merge by both 'year' and 'state'
+    result <- merge(actual_winner, winner_allyears, by = c('year', 'state'))
+
+    #identify matching/unmatching
+    result <- result %>%
+      mutate(party_match = ifelse(party_simplified == `president winning party_actual`, "Matched", "Unmatched"))
+
+    library(DT)
+    library(dplyr)
+
+    # Create the DataTable with color styling
+    plot1 <- datatable(result, caption = "DISTRICT WIDE WINNER") %>%
+      formatStyle(
+        'party_match', 
+        target = 'row',
+        backgroundColor = styleEqual(c('Matched', 'Unmatched'), c('lightgreen', 'lightcoral'))
+    )
+
+    plot1
+
+    ```
+
+2.  District-Wide Winner-Take-All + State-Wide “At Large” Votes
+
+    Similarly to #1 of 'Winner take-all' we will expand to a district level. From the table, anything in red is no match, which means opposite party of actual winner should have won; Green = fair allocation of votes based on max votes per district, Red = unfair allocation votes. In other words, the Harvard data shows 'candidate.x' and 'party' as winner based on higher votes. Meanwhile the 'actual_winner' opposes or matches that argumet depicted as 'candidate.y' and 'party_simplified'.
+
+    ```{r DISTRICT WIDE WINNER, results='hide', warning=FALSE, message = FALSE, collapse=TRUE}
+
+    #District-Wide Winner-Take-All + State-Wide “At Large” Votes
+    #Winner by district based on house data
+    allyears_district <- House %>%
+      filter(year >= 1976 & year <= 2020) %>%
+      filter(year %in% c(1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020)) %>%
+      group_by(year, state_fips, district, state) %>%
+      distinct(district, .keep_all = TRUE) %>%
+      select(year, state_fips, district, state, candidate, party) %>%
+      mutate(state = toupper(trimws(state)))
+
+
+
+    winner_allyears_president <- President %>%
+      filter(year >= 1976 & year <= 2020) %>%
+      group_by(year, state_fips, state, candidate) %>%
+      top_n(1, candidatevotes) %>%
+      select(year, state_fips, state, candidate, candidatevotes, party_simplified) %>%
+      mutate(state = toupper(trimws(state)))
+
+
+
+    # Filter winner_allyears_president to get top candidate for each (year, state_fips)
+    winner_allyears_president_top <- winner_allyears_president %>%
+      group_by(year, state_fips) %>%
+      top_n(1, candidatevotes) %>%
+      ungroup()
+
+
+    # Perform the join with distinct district
+    combined_data <- allyears_district %>%
+      left_join(winner_allyears_president_top, by = c("year", "state_fips")) %>%
+      distinct(district, .keep_all = TRUE) %>%
+      mutate(state = toupper(trimws(state.x))) %>%
+      select(state_fips, year, state, district, candidate.x, party, candidate.y, party_simplified)
+
+
+
+    ```
+
+    ```{r DISTRICT WIDE WINNER PLOT, warning=FALSE, message = FALSE, collapse=TRUE}
+
+    library(DT)
+    library(dplyr)
+
+    # Sample data (replace with your actual combined_data)
+    result2 <- combined_data %>%
+      mutate(party_match = ifelse(party_simplified == party, "Matched", "Unmatched"))
+
+    # Create the DataTable with color styling
+    plot <- datatable(result2, caption = "DISTRICT WIDE WINNER") %>%
+      formatStyle(
+        'party_match', 
+        target = 'row',
+        backgroundColor = styleEqual(c('Matched', 'Unmatched'), c('lightgreen', 'lightcoral'))
+      )
+
+    plot
+    ```
+
+The more granular we take MAX votes, the more unfavorable it is for a candidate. The data supports strongly a 'WINNER TAKE-ALL' approach. Should the electoral system follow different approaches, more factors must be considered, such as third + parties running, in contrast to only two parties running. The fear may lie in the disadvantages this would bring to candidates \[top candidates\] should a third or more parties come in, specially in a polarized election.
+
+#### **CONCLUSION**
+
+To conclude, unless the majority of the citizen voters/ the people are aware of how elections are decided, we can not call an approach as fair, although, 'YES' , 100% it is a democracy. Still, multiple questions will arise.. whether Electoral college votes are fairly allocated? Do states have their fair share of ECV's ? based on what? population? How about fusion votes? Why can one candidate represent multiple parties? are there not enough leaders aspiring for higher office roles to not be able to represent a party used by a fuse vote?
+
+Indeed, elections look quite complicated and they are often polarizing. However, in order to preserve a peaceful democracy perhaps educating the citizen voter is a great first step. Educating them as early as elementary school, because our voting system, our DEMOCRACY will be there for the rest of our lives. Not only that but our DEMOCRACY will determine our lifestyle. For the short term, perhaps a questions in the voting ballot of how we want ECV's to be allocated would help.
