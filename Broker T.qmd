@@ -1,0 +1,171 @@
+---
+title: "Group project STA9750 - Broker T's"
+format: html
+editor: visual
+---
+
+![Caption](BROKER%20T's/Broker%20T's.jpg){fig-align="center"}
+
+Introduction:
+
+# Task 1 Download Data and Read into R
+
+We will be looking at data from 2018-2023 throughout three stages of pandemic (Pre, during, post Covid19).
+
+We will look at two main data sources for our mortgage analysis.
+
+1.  <div>
+
+    -   [Consumer Financial Protection Bureau - HMDA Data](https://ffiec.cfpb.gov/data-browser/). HMDA; Home Mortgage Disclosure Act is a federal law that requires financial institutions to report loan level mortgage activity, accessible to the public. This is done to identify any discriminatory practices in mortagage lending within communities, as well as to maintain equity.
+
+    ```{r CODE TO DOWNLOAD AND READ HMDA}
+
+    ```
+
+    </div>
+
+2.  <div>
+
+    -   [United States Census Bureau - S1901](https://data.census.gov/table/ACSST5Y2022.S1901?q=Income%20by%20county&g=040XX00US36,36$0500000), Income in past 12 months
+
+    -   [United States Census Bureau - S2401](https://data.census.gov/table/ACSST5Y2022.S2401?q=Employment%20by%20county&g=040XX00US36,36$0500000), Occupation by Demo Gender
+
+        U.S. census is performed every 10 years, to count people living in the US, this will help determine multiple things such as representation in congress, distribution of federal funds, district lines, etc.
+
+    ```{r CODE TO DOWLOAD AND READ CENSUS}
+
+    ```
+
+    </div>
+
+# Task 2 Cleaning Data/ Tidi Data
+
+```{r CODE TO CLEAN HMDA}
+
+```
+
+```{r CODE TO CLEAN CENSUS}
+
+```
+
+```{r CODE TO JOIN TABLES IF AND AS NEEDED}
+
+```
+
+# Task 3 Questions and Analysis
+
+For our initial exploration we will look at Mortgage data in **3 Metrics \[Geography, Demography, Economics\] , pre,during, post pandemic \[2018-2023\]**
+
+#### *Geography - Lauren* 
+
+Is there a county that has more of a specific loan type taken out than others? If so, what is that loan type? What could be the reason behind this? 
+
+-   With that, what type of loan was most popular pre, during, and post pandemic? 
+
+```{r}
+# ** filtering by county, by 'Loan Type (loan_type)', 'Action Taken(action_taken)'. And we consider all 6 dataset for each year from 2018 to 2023.
+
+```
+
+-   Is there a skew of total amount of loans given out depending on the county? Are there areas that were more likely to receive loans depending on their geographic area?
+
+```{r}
+#** we can filter by county, 'Action Taken (action_taken)'.
+```
+
+-   Do certain jobs influence the types of mortgages people choose in different counties?
+
+```{r}
+#Here we can explore whether people in certain job sectors prefer specific types of loans, such as conventional, FHA, or VA loans, and how this choice might have changed during the pandemic.
+```
+
+#### *Demography - Alex* 
+
+-   Based on race and sex, who has the most and least loans? Was there a specific loan per each? \[loan dollars by race\]
+
+```{r}
+#** we can filter by 'Race (derived_race)', by 'Loan Type (loan_type)' + Loan amount $, interest rate 
+```
+
+-   Is there a skew of differing interest rates depending on the county? What about the sex/race within that county? \[loan rates by race\]
+
+    ```{r}
+    #** we can filter by county, by 'Loan Product (derived_loan_product_type)', by 'Race (derived_race)' and by 'Sex (derived_sex)'
+    ```
+
+```{=html}
+<!-- -->
+```
+-   How does the link between jobs, loan types, and demographics change before, during, and after the pandemic? \[job to loan type by race\]
+
+    ```{r}
+    #By looking at how job type and demographic details like gender relate to the choice of loan, we will seek insights into how economic behaviors might have shifted in response to the pandemic's impacts.
+    ```
+
+#### *Economics - Ayrat* 
+
+-   Do higher incomes and certain jobs in a county affect mortgage rates during the pandemic?
+
+    ```{r}
+    #Here we can look at whether people with higher incomes or specific jobs like technology or healthcare get better mortgage deals during times of economic change caused by the pandemic.
+    ```
+
+-   Are people with higher **incomes** more likely to get lower mortgage rates during the pandemic?
+
+    ```{r}
+    #Here we will investigate whether people earning more money consistently receive better mortgage rates across the different stages of the pandemic.
+    ```
+
+-   How does job stability in different counties impact mortgage approvals during the pandemic?
+
+```{r}
+#Here we can find out if having a stable job helps people get their mortgage applications approved during the pandemic, especially when some job sectors might be more secure than others.
+```
+
+# Task 4 Report & Answering Overarching Q
+
+**STARTING OVERARCHING QUESTION =** How does the county you live in and income you make affect mortgage rates, particularly throughout the three stages of the Covid-19 pandemic (2018-2023)?
+
+*Updates below .......*
+
+**TITTLE:**
+
+*MORTGAGES WHATS THE BIG DEAL?*
+
+*The Shift of Mortgages Pre, During, Post pandemic \[2018-2023\] based on three metrics: GEO, DEMO, & ECON.*
+
+By Lauren, Alex, Ayrat
+
+**UPDATED AND FINAL OVERARCHING QUESTION =** How does county, race, and income affect mortgages in New York?
+
+Introduction: What are we looking at? our main idea, the overarching questions .... why we are doing this?
+
+Body1: County Observations/ Highlights + Charts+ Graphs
+
+-   pre pandemic
+
+-   during pandemic
+
+-   post pandemic
+
+Body 2: Race Observations/Highlights + Charts + Graphs
+
+-   pre pandemic
+
+-   during pandemic
+
+-   post pandemic
+
+Body 3: Economics Observations/ Highlights + charts + Graphs
+
+-   pre pandemic
+
+-   during pandemic
+
+-   post pandemic
+
+Conclusion: 1 key staetemt from each metric. + A potential prediction/ a hypothesis for the future\[what does the future hold...can we predict anything from data?\]
+
+##### *Sources:*
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
