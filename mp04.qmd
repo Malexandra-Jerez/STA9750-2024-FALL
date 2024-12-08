@@ -1,0 +1,1157 @@
+---
+title: "mp04"
+format: html
+theme: sandstone
+---
+
+### **Project 4 : Monte Carlo-Informed Selection of CUNY Retirement Plans**
+
+by Maria Jerez
+
+![Monte Carlo definition by Investopedia](data:image/jpeg;base64,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)
+
+GREAT NEWS! I just got hired at Baruch college for the position as an ESOL professor. I'm at a difficult point, where I must choose one of two [retirement plans](https://www.cuny.edu/wp-content/uploads/sites/4/page-assets/about/administration/offices/hr/benefits/Benefits-Guide-Retirement-Plans-Final-HEO-and-ECP.pdf) offered : TRS & ORP. TRS is a pension plan, and ORP is like a 401K. To help me with my decision I will be analyzing a few metrics and sets of data, see below. Dive in and help me on this hard decision. I'll take you through my analysis process and decision.
+
+##### Data sources:
+
+[Federal Reserve Bank of Saint Louis](https://fred.stlouisfed.org/docs/api/fred/series_observations.html) : US Economic data API
+
+Metrics:
+
+1.  CPI as *Inflation Data*
+2.  International Stock market as *International Equity Market total returns data*
+3.  US Monthly Treasury Yields as *Short Term Debt Returns*
+
+[Alpha Vantage](https://www.alphavantage.co/documentation/) : free financial market data API
+
+Metrics:
+
+1.  S&P 500 as *US equity data*
+2.  10 Treasury Yield as *Bond Market total returns data*
+3.  Real GDP as *Wage Growth data*
+
+I've requested a set of keys from the sources in order to extract data from it's APIs. After completing these tasks, I then extracted and created data frames for the metrics above and analyzed each. See code below for code of extraction.
+
+My keys:
+
+```{r warning=FALSE, echo=FALSE}
+#MY KEYS - NEED TO HIDE THIS 
+fred_api_key <- "d391cfd4fa94b459c753a6735cd735ca"
+API_KEY <- "02UNG4DCLP48N68U"
+
+```
+
+```{r warning=FALSE, echo=FALSE, message=FALSE, results='hide'}
+library(tidyverse)
+library(httr2)
+library(ggplot2)
+```
+
+<details><summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR ALPHA DATA</strong></summary>\</summary\>
+
+\`\`\` r
+
+```{r warning=FALSE, eval=FALSE}
+library(tidyverse)
+library(httr2)
+
+# FRED OBSERVATIONS DATA - INFLATION 
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_params <- list(
+  series_id = "CPIAUCSL",    # Series ID = consumer price index for urban consumers/ Inflation data
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_response <- request(fred_url) |>
+  req_url_query(!!!fred_params) |>  # Pass query parameters
+  req_perform()
+
+fred_data <- resp_body_json(fred_response)
+
+# Extract the observations data from the response
+observations <- fred_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_df <- data.frame(
+  date = sapply(observations, function(x) x$date),
+  value = sapply(observations, function(x) x$value)
+)
+
+# FRED OBSERVATIONS DATA - IR14270 (if available, for international stock market data), values are lin= actual price/actual value
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_int_params <- list(
+  series_id = "IR14270",     # Series ID = International stock market
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_int_response <- request(fred_url) |>
+  req_url_query(!!!fred_int_params) |>  # Pass query parameters
+  req_perform()
+
+fred_int_data <- resp_body_json(fred_int_response)
+
+
+# Extract the observations data from the response
+observations_int <- fred_int_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_int_df <- data.frame(
+  date = sapply(observations_int, function(x) x$date),
+  value = sapply(observations_int, function(x) x$value)
+)
+
+
+####### SHORT TERM DEBT RETURS [STDR] - USE MONTHLY TREASURY YIELDS with units= lin[percentage]
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_stdr_params <- list(
+  series_id = "DGS1MO",     # Series ID = Treasury Yiields
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_stdr_response <- request(fred_url) |>
+  req_url_query(!!!fred_stdr_params) |>  # Pass query parameters
+  req_perform()
+
+fred_stdr_data <- resp_body_json(fred_stdr_response)
+
+
+# Extract the observations data from the response
+observations_stdr <- fred_stdr_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_stdr_df <- data.frame(
+  date = sapply(observations_stdr, function(x) x$date),
+  value = sapply(observations_stdr, function(x) x$value)
+)
+
+```
+
+\`\`\`
+
+</details>
+
+<details><summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR **ALPHA DATA**</strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, eval=FALSE}
+library(tidyverse)
+library(httr2)
+
+#ALPHAVANTAGE DATA - US EQUITY 
+
+req <- request("https://www.alphavantage.co/query") |>
+  req_url_query(`function` = "TIME_SERIES_MONTHLY", 
+                symbol = "SPY",  #s%p 500, US equity data 
+                apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+sp_data <- resp_body_json(req)
+
+# Extract the time series data (the 'Time Series (Monthly)' part)
+sp_time_series <- sp_data[["Monthly Time Series"]] 
+
+# Convert it into a data frame
+sp_time_series_df <- data.frame(
+  date = as.Date(names(sp_time_series)),  # Convert dates to Date class
+  open = sapply(sp_time_series, function(x) as.numeric(x[["1. open"]])),
+  high = sapply(sp_time_series, function(x) as.numeric(x[["2. high"]])),
+  low = sapply(sp_time_series, function(x) as.numeric(x[["3. low"]])),
+  close = sapply(sp_time_series, function(x) as.numeric(x[["4. close"]])),
+  volume = sapply(sp_time_series, function(x) as.numeric(x[["5. volume"]])),
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+
+#### ALPHAVANTAGE DATA - 10 YEAR TREASURY BOND YIELD in percent 
+
+bond_req <- request("https://www.alphavantage.co/query") |>
+req_url_query(`function` = "TREASURY_YIELD", 
+              interval = "monthly",  
+              apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+bond_data <- resp_body_json(bond_req)
+
+
+# Extract and process the bond data
+bond_df_data <- bond_data$data 
+
+# Extract 'date' and 'value' from bond_df_data
+dates <- sapply(bond_df_data, function(x) x$date)  # Extract 'date'
+values <- sapply(bond_df_data, function(x) as.numeric(x$value))  # Extract 'value' and convert to numeric
+
+# Create the data frame
+bond_df <- data.frame(
+  date = as.Date(dates),  # Convert 'date' to Date class
+  value = values,  # Numeric 'value'
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+
+### REAL GDP, as GDP INCREASES SO DOES WAGE GROWTH in Billions of dollars 
+#https://www.alphavantage.co/query?function=REAL_GDP&interval=annual&apikey=demo
+
+gdp_req <- request("https://www.alphavantage.co/query") |>
+  req_url_query(`function` = "REAL_GDP", 
+                interval = "annual",  
+                apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+gdp_data <- resp_body_json(gdp_req)
+
+
+# Extract and process the bond data
+gdp_df_data <- gdp_data$data 
+
+# Extract 'date' and 'value' from bond_df_data
+dates <- sapply(gdp_df_data, function(x) x$date)  # Extract 'date'
+values <- sapply(gdp_df_data, function(x) as.numeric(x$value))  # Extract 'value' and convert to numeric
+
+# Create the data frame
+gdp_df <- data.frame(
+  date = as.Date(dates),  # Convert 'date' to Date class
+  value = values,  # Numeric 'value'
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+
+```
+
+\`\`\`
+
+</details>
+
+#### Economy Analysis
+
+I will now dive into my initial economic analysis based on the metrics described at the beginning. I'm looking for trends that stand out. Here are some findings I came across and graphs to help us better understand.
+
+##### **S&P 500 as *US equity data***
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH S&P500_US EQUITY - Monthly Average High and Low Values</strong></summary>
+
+\`\`\`r
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+req <- request("https://www.alphavantage.co/query") |>
+  req_url_query(`function` = "TIME_SERIES_MONTHLY", 
+                symbol = "SPY",  #s%p 500, US equity data 
+                apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+data <- resp_body_json(req)
+
+#Inspect the structure of the data
+str(data)
+
+# Extract the time series data (the 'Time Series (Monthly)' part)
+time_series <- data[["Monthly Time Series"]] 
+
+# Convert it into a data frame
+time_series_df <- data.frame(
+  date = as.Date(names(time_series)),  # Convert dates to Date class
+  open = sapply(time_series, function(x) as.numeric(x[["1. open"]])),
+  high = sapply(time_series, function(x) as.numeric(x[["2. high"]])),
+  low = sapply(time_series, function(x) as.numeric(x[["3. low"]])),
+  close = sapply(time_series, function(x) as.numeric(x[["4. close"]])),
+  volume = sapply(time_series, function(x) as.numeric(x[["5. volume"]])),
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+# View the first few rows of the data
+str(time_series_df)
+
+# Group by month (and possibly year if you want to avoid year-based aggregation)
+monthly_avg_df <- time_series_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date to the start of the month
+  group_by(month) |>  # Group by month
+  summarise(
+    avg_open = mean(open, na.rm = TRUE),
+    avg_high = mean(high, na.rm = TRUE),
+    avg_low = mean(low, na.rm = TRUE),
+    avg_close = mean(close, na.rm = TRUE),
+    avg_volume = mean(volume, na.rm = TRUE)
+  )
+
+# View the first few rows of the monthly averages
+head(monthly_avg_df)
+
+# Reshape the data to long format for ggplot
+monthly_avg_high_low <- monthly_avg_df |>
+  select(month, avg_high, avg_low) |>
+  gather(key = "metric", value = "value", -month)
+
+glimpse(monthly_avg_high_low)
+
+# Plot the monthly high and low averages over time
+ssplot <- ggplot(monthly_avg_high_low, aes(x = month, y = value, color = metric)) +
+  geom_line(size = .10) +  # Line plot for high and low values
+  geom_point(size = .25) +  # Points to mark data points
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", size = .05) +
+  labs(
+    title = "S&P500_US EQUITY - Monthly Average High and Low Values",
+    x = "Month",
+    y = "Average $ Value ",
+    color = "Metric"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+\`\`\`
+
+</details>
+
+```{r  warning=FALSE,echo=FALSE, message=FALSE, eval=FALSE}
+ print(spplot)
+
+```
+
+![Alt text](S&P MP4.PNG)
+
+I am using the S&P 500 to portray US Equity. The S&P 500 index reflects the 500 largest publicly traded companies in the US., spanning from industries such as healthcare, finance, consumer goods, and energy. I can conclude that the better the S&P performs the better it reflects US equity. In other words an upward trend = growth, downward trend = difficulties.
+
+From this graph, in a spam of 20+ years, we have a healthy upward trend, we have growth. However, zooming into chunks of years, particularly in recent years there seems to be a steeper spike upwards, perhaps too healthy a market. As we also see from the graph, after a spike comes a drop. For example zooming into years 2007-2008sh, a spike happened around 2007 when suddenly dropped in 2008. Of course we must consider historical events, in 2008 the stock market crashed due to a housing bubble. As another example, we see another big slope up and then down from 2020-2021, the historical event for this was Covid-19.
+
+To conclude on this graph, US equity looks fantastico in a longer time span and bad on a short time span. But increasing either way.
+
+##### 10 Treasury Yield as *Bond Market total returns data*
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH 10 Year Treasury Bond Yield; Bond Market Returns - Monthly Average % values</strong></summary>
+
+\`\`\`r
+
+```{r message=FALSE, eval=FALSE, warning=FALSE}
+
+bond_req <- request("https://www.alphavantage.co/query") |>
+req_url_query(`function` = "TREASURY_YIELD", 
+              interval = "monthly",  
+              apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+bond_data <- resp_body_json(bond_req)
+
+
+# Extract and process the bond data
+bond_df_data <- bond_data$data 
+
+# Extract 'date' and 'value' from bond_df_data
+dates <- sapply(bond_df_data, function(x) x$date)  # Extract 'date'
+values <- sapply(bond_df_data, function(x) as.numeric(x$value))  # Extract 'value' and convert to numeric
+
+# Create the data frame
+bond_df <- data.frame(
+  date = as.Date(dates),  # Convert 'date' to Date class
+  value = values,  # Numeric 'value'
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+
+# Group by month (and possibly year if you want to avoid year-based aggregation)
+monthly_bondavg_df <- bond_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date to the start of the month
+  group_by(month) |>  # Group by month
+  summarise(
+    avg_value = mean(value, na.rm = TRUE)
+  )
+
+
+# Reshape the data to long format for ggplot
+monthly_bondavg_plotdata <- monthly_bondavg_df |>
+  select(month, avg_value) |>
+  gather(key = "metric", value = "value", -month)
+
+
+# Plot the monthly high and low averages over time
+tenyear_plot <- ggplot(monthly_bondavg_plotdata, aes(x = month, y = value, color = metric)) +
+  geom_line(size = .10) +  # Line plot for high and low values
+  geom_point(size = .25) +  # Points to mark data points
+  labs(
+    title = "10 Year Treasury Bond Yield; Bond Market Returns - Monthly Average % values",
+    x = "Month",
+    y = "Average % Value ",
+    color = "Metric"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+\`\`\`
+
+</details>
+
+```{r eval=FALSE, warning=FALSE,echo=FALSE, message=FALSE}
+ print(tenyear_plot)
+```
+
+![This is an image](10 year treasury bond mp4.PNG)
+
+For this graph I have the 10 year Treasury Bond reflecting Bond Market returns over time. The 10 year Treasury Bond Yield is the percent interest paid by government for borrowed money for 10 years. The higher the % interest the more money payed back to investors/lenders the better. As it is government backed, it is considered a safe investment.
+
+From the graph we also see % rates rise up until 1980s and then fall. Rising rate means confidence in the economy, higher bond prices, higher returns. Falling rates mean low confidence in the economy, lower bond prices, lower returns.
+
+Quick note: The 1980's represent an era of consumerism and materialism, as well as the birth of MTV! In the 1990s the internet takes the house.
+
+So it looks like confidence for investors is growing from 2020 on, perhaps from higher returns from this bond investment. If history repeats itself and should the 10 year treasury bond reach a 10%+ yield such as that of the 1980s, than it may just be a good time to invest in this bond and wait till it reaches peak......or not? Caution and further research must be done.
+
+##### Real GDP as *Wage Growth data*
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH Real GDP; Wage Growth - Monthly Average Billion \$s</strong></summary>
+
+\`\`\`r
+
+```{r message=FALSE, eval=FALSE, warning=FALSE}
+
+gdp_req <- request("https://www.alphavantage.co/query") |>
+  req_url_query(`function` = "REAL_GDP", 
+                interval = "annual",  
+                apikey = API_KEY) |>
+  req_perform() 
+
+#JSON response
+gdp_data <- resp_body_json(gdp_req)
+
+
+# Extract and process the bond data
+gdp_df_data <- gdp_data$data 
+
+# Extract 'date' and 'value' from bond_df_data
+dates <- sapply(gdp_df_data, function(x) x$date)  # Extract 'date'
+values <- sapply(gdp_df_data, function(x) as.numeric(x$value))  # Extract 'value' and convert to numeric
+
+# Create the data frame
+gdp_df <- data.frame(
+  date = as.Date(dates),  # Convert 'date' to Date class
+  value = values,  # Numeric 'value'
+  stringsAsFactors = FALSE  # Avoid factors
+)
+
+
+# Group by month (and possibly year if you want to avoid year-based aggregation)
+monthly_gdpavg_df <- gdp_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date to the start of the month
+  group_by(month) |>  # Group by month
+  summarise(
+    avg_value = mean(value, na.rm = TRUE)
+  )
+
+
+# Reshape the data to long format for ggplot
+monthly_gdpavg_plotdata <- monthly_gdpavg_df |>
+  select(month, avg_value) |>
+  gather(key = "metric", value = "value", -month)
+
+# Plot the monthly high and low averages over time
+realgdp_plot <- ggplot(monthly_gdpavg_plotdata, aes(x = month, y = value, color = metric)) +
+  geom_line(size = .10) +  # Line plot for high and low values
+  geom_point(size = .25) +  # Points to mark data points
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", size = .2) + 
+  labs(
+    title = "Real GDP; Wage Growth - Monthly Average Billion $",
+    x = "Month",
+    y = "Average Billion $ ",
+    color = "Metric"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+\`\`\`
+
+</details>
+
+```{r eval=FALSE, warning=FALSE,echo=FALSE, message=FALSE}
+ print(realgdp_plot)
+```
+
+For this graph I use Real GDP as an indicator of Wage Growth. Real GDP is another indicator of the economy health, it measures the values of goods and services produced in a period of time. One conclusion I've made is that a rise in goods and services is a result of a rise in demand for goods, if effect then is a rise in labor to meet demand,and hence a rise in wages to fill labor gaps = wage growth.
+
+So, I can safely say that because Real GDP has been rising , wages will also continue to rise. This also confirms that my wage will continue to increase over time, more money in my bag, more money to save! But how true is that? I must find a way to maintain the same expenses until I retire, frugality is key....maybe just maybe in order to preserve this trend and bag more cash in my pocket I will cut on some proteins and carbs when prices of goods rise. No more Turkey for me.
+
+##### CPI as *Inflation Data*
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly CPI (Consumer Price Index) Over Time as INFLATION</strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_params <- list(
+  series_id = "CPIAUCSL",    # Series ID = consumer price index for urban consumers/ Inflation data
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_response <- request(fred_url) |>
+  req_url_query(!!!fred_params) |>  # Pass query parameters
+  req_perform()
+
+fred_data <- resp_body_json(fred_response)
+
+
+# Extract the observations data from the response
+observations <- fred_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_df <- data.frame(
+  date = sapply(observations, function(x) x$date),
+  value = sapply(observations, function(x) x$value)
+)
+
+
+observations_df$date <- as.Date(observations_df$date, format = "%Y-%m-%d")  # convert date chr to date
+
+# Downsample to monthly data by grouping and summarizing
+# We can summarize by taking the average for each month (or any other summary statistic)
+monthly_data <- observations_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date down to the start of the month
+  group_by(month) |>  # Group by the rounded month
+  summarise(monthly_value = mean(as.numeric(value), na.rm = TRUE))  # Summarize the values (e.g., average)
+
+
+# Plot the monthly data using ggplot2 with a trend line
+cpi_plot <- ggplot(monthly_data, aes(x = month, y = monthly_value)) +
+  geom_line(color = "blue", size = .5) +              # Line plot
+  geom_point(color = "red", size = .05) +              # Points on the line
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", size = .25) +  # Add a linear trend line
+  labs(title = "Monthly CPI (Consumer Price Index) Over Time: INFLATION",
+       x = "Month",
+       y = "Average CPI Value") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+```
+
+\`\`\`
+
+</details>
+
+```{r warning=FALSE,echo=FALSE, message=FALSE}
+ print(cpi_plot)
+```
+
+For this graph I use CPI\[Consumer price index\] to evaluate inflation. Or should I call it Inflammation...because boy does this hurt, especially when it rises quickly such as what we have seen happen sometime after 2020. There goes my frugality from wage growth savings. Back to analysis. CPI is a measure of prices paid by consumers for services and goods. Hence the rise reflects the rise in expenses, the consumer is paying more for goods and services. I am paying more for rice with chicken!!
+
+To conclude here, inflation will kill my savings. Perhaps if it falls below the trend line I'm relatively safe?.....
+
+##### International Stock market as *International Equity Market total returns data*
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly International Stock Market Avg. Value Over Time</strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_int_params <- list(
+  series_id = "IR14270",     # Series ID = International stock market
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_int_response <- request(fred_url) |>
+  req_url_query(!!!fred_int_params) |>  # Pass query parameters
+  req_perform()
+
+fred_int_data <- resp_body_json(fred_int_response)
+
+
+# Extract the observations data from the response
+observations_int <- fred_int_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_int_df <- data.frame(
+  date = sapply(observations_int, function(x) x$date),
+  value = sapply(observations_int, function(x) x$value)
+)
+
+
+observations_int_df$date <- as.Date(observations_int_df$date, format = "%Y-%m-%d")  # convert date chr to date
+
+# Downsample to monthly data by grouping and summarizing
+# We can summarize by taking the average for each month (or any other summary statistic)
+monthly_int_data <- observations_int_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date down to the start of the month
+  group_by(month) |>  # Group by the rounded month
+  summarise(monthly_value = mean(as.numeric(value), na.rm = TRUE))  # Summarize the values (e.g., average)
+
+
+# Plot the monthly data using ggplot2 with a trend line
+internationalstock_plot <- ggplot(monthly_int_data, aes(x = month, y = monthly_value)) +
+  geom_line(color = "green", size = .2) +              # Line plot
+  geom_point(color = "red", size = .1) +              # Points on the line
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", size = .025) +  # Add a linear trend line
+  labs(title = "Monthly International Stock Market Avg. Value Over Time",
+       x = "Month",
+       y = "Average $ Value") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+```
+
+\`\`\`
+
+</details>
+
+```{r warning=FALSE,echo=FALSE, message=FALSE}
+ print(internationalstock_plot)
+```
+
+For this graph I look at International stock market data for International Equity analysis. The international stock market measure stocks that are international to the investors country of investment. In contrast to S&P 500 that measures US only equities.
+
+From the graph, the overall trend is rising, we do see time periods for grater equity; peaks; rises , such as those in 2010-2012sh and most recently 2023-2024sh.
+
+I will conclude that investing in international markets will diversify my investments and potentially level up any losses \[if any\] had by investing on S&P.
+
+##### US Monthly Treasury Yields as *Short Term Debt Returns*
+
+<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - US Monthly Treasury Yield % ; Short Term Debt Returns Over Time</strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+
+# Parameters and request
+fred_url <- "https://api.stlouisfed.org/fred/series/observations"
+fred_stdr_params <- list(
+  series_id = "DGS1MO",     # Series ID = Treasury Yields
+  api_key = fred_api_key,    # API key
+  file_type = "json",        # Specify response format as JSON
+  start_date = "2000-01-01", # Optional start date for data
+  end_date = "2020-01-01"    # Optional end date for data
+)
+
+# Send the GET request for series information
+fred_stdr_response <- request(fred_url) |>
+  req_url_query(!!!fred_stdr_params) |>  # Pass query parameters
+  req_perform()
+
+fred_stdr_data <- resp_body_json(fred_stdr_response)
+
+
+# Extract the observations data from the response
+observations_stdr <- fred_stdr_data$observations
+
+# Convert it to a data frame for easier analysis
+observations_stdr_df <- data.frame(
+  date = sapply(observations_stdr, function(x) x$date),
+  value = sapply(observations_stdr, function(x) x$value)
+)
+
+observations_stdr_df$date <- as.Date(observations_stdr_df$date, format = "%Y-%m-%d")  # convert date chr to date
+
+# Downsample to monthly data by grouping and summarizing
+# We can summarize by taking the average for each month (or any other summary statistic)
+monthly_stdr_data <- observations_stdr_df |>
+  mutate(month = floor_date(date, "month")) |>  # Round the date down to the start of the month
+  group_by(month) |>  # Group by the rounded month
+  summarise(monthly_value = mean(as.numeric(value), na.rm = TRUE))  # Summarize the values (e.g., average)
+
+
+# Plot the monthly data using ggplot2 with a trend line
+monthly_treasuryyield <- ggplot(monthly_stdr_data, aes(x = month, y = monthly_value)) +
+  geom_line(color = "green", size = .2) +              # Line plot
+  geom_point(color = "red", size = .1) +              # Points on the line
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", size = .05) +  # Add a linear trend line
+  labs(title = "US Monthly Treasury Yield % ; Short Term Debt Returns Over Time",
+       x = "Month",
+       y = "Average % Values") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+
+```
+
+\`\`\`
+
+</details>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+print(monthly_treasuryyield)
+```
+
+From this graph I can conclude that this is like a heart beat EKG under stress. I am analyzing the US monthly treasury yield to view any short term debt return trends. The US monthly Treasury yield is like the 10 year yield, interest payed by government for borrowed money, but monthly. Again, it's an indicator of economy health in a short term.
+
+As % yields rise, so does short term debt returns. Meaning, more short term debts are payed-off/ returned with higher % rates. As % yields fall, so does short term debt returns. That makes sense, government wants to pay off higher rate loans, a money loss for them. However it looks like, from the graph, in a time period between 2007-2017sh, yields are relatively low and stagnant. The same happens sometime between 2020-2022. Is it stress? less borrowing?
+
+In terms of favoring my retirement, maybe investing/ lending when rates are increasing will be a plus. I will be collecting greater interest, lets hope this is the trend when it's time for me to retire.
+
+#### Monthly retirement returns from TRS & ORP
+
+##### TRS
+
+After Economy analysis I will now calculate monthly Benefits for the TRS plan and potential monthly benefits for ORP.
+
+I'll First calculate TRS. I will keep in mind that TRS benefit is a pension benefit. When it's time for me to retire I will receive a check at/near monthly equal amounts for the remainder of my life \[till death.\] The downside of this is that once it's time for me to retire, and should markets perform higher hence provide higher returns, I will not reap those benefits. It's one stable check market win or loose.
+
+<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+
+\`\`\`r
+
+```{r}
+calculate_benefit <- function(FAS, N, CPI) {
+  
+  # Step 1: Calculate base benefit
+  if (N <= 20) {
+    base_benefit <- 1.67 / 100 * FAS * N
+  } else if (N == 20) {
+    base_benefit <- 1.75 / 100 * FAS * N
+  } else {
+    base_benefit <- (35 / 100 + 2 / 100 * (N - 20)) * FAS
+  }
+  
+  # Step 2: Calculate inflation adjustment
+  inflation_adjustment <- 0.5 * CPI
+  inflation_adjustment <- ceiling(inflation_adjustment * 10) / 10  # Round up to nearest tenth
+  
+  # Cap inflation adjustment between 1% and 3%
+  if (inflation_adjustment < 1) {
+    inflation_adjustment <- 1
+  } else if (inflation_adjustment > 3) {
+    inflation_adjustment <- 3
+  }
+  
+  # Step 3: Apply inflation adjustment to base benefit
+  adjusted_benefit <- base_benefit * (1 + inflation_adjustment / 100)
+  
+  # Return the adjusted benefit
+  return(adjusted_benefit)
+}
+
+```
+
+\`\`\`
+
+</details>
+
+```{r warning=FALSE}
+# Example:
+FAS <- 90000  # Example Final Average Salary
+N <- 20       # Example number of years served
+CPI <- 300    # Example CPI 
+```
+
+For this example TRS benefit I used 90k as my final average salary. I can adjust accordingly on my R code. Here are my monthly Benefits for the TRS plan based on these metrics.
+
+```{r warning=FALSE, echo = FALSE}
+# Calculate the benefit
+benefit <- calculate_benefit(FAS, N, CPI)
+benefit <- benefit/12 
+print(benefit)
+```
+
+##### ORP
+
+I will now explore ORP monthly benefits. The ORP benefit is like a 401k, so if markets are performing well in my retirement then I potentially have greater monthly benefits or maybe longer benefits. I must keep in mind this is not forever \[till death\], so it's important to invest well as well as to be cognizant of how much I will extract yearly for whatever number of years I think I will continue to live after retirement. So I guess one of the bigger downside is this plan will keep me alert on the number of years I will be alive - jaja. I also have a risk of markets not performing well. Unless of course I'm an excellent money manager and investor. In any case let's look at the numbers. Here are my monthly benefits :
+
+<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+#CALCULATING ORP BENEFIT 
+# Define the function to calculate total savings
+calculate_orp_savings <- function(initial_salary, salary_increase_rate, years_at_cuny, starting_age) {
+  
+  # Define the asset allocation and average returns for each period
+  asset_allocation <- list(
+    age_25_49 = c(US_Equities = 0.54, International_Equities = 0.36, Bonds = 0.10),
+    age_50_59 = c(US_Equities = 0.47, International_Equities = 0.32, Bonds = 0.21),
+    age_60_74 = c(US_Equities = 0.34, International_Equities = 0.23, Bonds = 0.43),
+    age_75_plus = c(US_Equities = 0.19, International_Equities = 0.13, Bonds = 0.62, Short_Term_Debt = 0.06)
+  )
+  
+  returns <- c(US_Equities = 0.07, International_Equities = 0.06, Bonds = 0.04, Short_Term_Debt = 0.02)
+  
+  # Function to compute contributions
+  calc_contributions <- function(salary, years) {
+    contributions <- numeric(years)
+    for (year in 1:years) {
+      if (salary <= 45000) {
+        employee_contrib <- 0.03 * salary
+      } else if (salary <= 55000) {
+        employee_contrib <- 0.035 * salary
+      } else if (salary <= 75000) {
+        employee_contrib <- 0.045 * salary
+      } else if (salary <= 100000) {
+        employee_contrib <- 0.0575 * salary
+      } else {
+        employee_contrib <- 0.06 * salary
+      }
+      
+      if (year <= 7) {
+        employer_contrib <- 0.08 * salary
+      } else {
+        employer_contrib <- 0.10 * salary
+      }
+      
+      total_contrib <- employee_contrib + employer_contrib
+      contributions[year] <- total_contrib
+      salary <- salary * (1 + salary_increase_rate)  # Salary increases yearly
+    }
+    return(contributions)
+  }
+  
+  # Calculate contributions for all years
+  contributions <- calc_contributions(initial_salary, years_at_cuny)
+  
+  # Calculate asset growth by age range
+  total_savings <- 0
+  current_age <- starting_age
+  
+  for (year in 1:years_at_cuny) {
+    # Determine the asset allocation based on age
+    if (current_age >= 75) {
+      allocation <- asset_allocation$age_75_plus
+    } else if (current_age >= 60) {
+      allocation <- asset_allocation$age_60_74
+    } else if (current_age >= 50) {
+      allocation <- asset_allocation$age_50_59
+    } else {
+      allocation <- asset_allocation$age_25_49
+    }
+    
+    # Calculate the return for this year
+    growth_rate <- sum(allocation * returns)
+    total_savings <- total_savings * (1 + growth_rate) + contributions[year]
+    
+    # Increase the age by 1 year
+    current_age <- current_age + 1
+  }
+  
+  return(total_savings)
+}
+
+```
+
+\`\`\`
+
+</details>
+
+For this ORP benefit example I am assuming the below scenario. I'm am also calculating 20 years of retirement
+
+```{r warning=FALSE, message=FALSE}
+# Example:
+initial_salary <- 65000
+salary_increase_rate <- 0.03  # 3% annual increase in salary
+years_at_cuny <- 20           # Employee works 20 years at CUNY
+starting_age <- 25 
+
+#NOTE: 20 years monthly benefits after retirement#
+```
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+total_savings <- calculate_orp_savings(initial_salary, salary_increase_rate, years_at_cuny, starting_age)
+
+RETIREMENT <- total_savings / 240 #TOTALSAVINGS$/ Number of months in retirement [20yeras = 240 months]
+RETIREMENT 
+```
+
+With both Calculations there are a ton of things to keep in mind. For TRS I'm assuming a 90K AVG salary at end of my tenure. It could be more or less. For ORP, I am assuming a 65K starting salary with monthly increase rate at 3%, but we must also consider market performance. Also could be more or less. So these numbers are just estimates.
+
+#### MONTE CARLO ANALYSIS
+
+So I want to have more confidence of my future returns. I will now apply the Monte Carlo analysis to my calculations. Here are my results:
+
+##### TRS
+
+<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+### APPLY MONTE CARLO TO TRS 
+### # Load necessary library
+library(MASS)  # For simulating random variables (like FAS and CPI)
+
+# Function to calculate the retirement benefit with Monte Carlo Analysis
+monte_carlo_benefit_trs <- function(initial_FAS, mean_CPI, sd_CPI, mean_years_served, sd_years_served, num_simulations = 200) {
+  
+  # Function to calculate the benefit
+  calculate_benefit_trs <- function(FAS, N, CPI) {
+    # Step 1: Calculate base benefit
+    if (N <= 20) {
+      base_benefit <- 1.67 / 100 * FAS * N
+    } else if (N == 20) {
+      base_benefit <- 1.75 / 100 * FAS * N
+    } else {
+      base_benefit <- (35 / 100 + 2 / 100 * (N - 20)) * FAS
+    }
+    
+    # Step 2: Calculate inflation adjustment
+    inflation_adjustment <- 0.5 * CPI
+    inflation_adjustment <- ceiling(inflation_adjustment * 10) / 10  # Round up to nearest tenth
+    
+    # Cap inflation adjustment between 1% and 3%
+    if (inflation_adjustment < 1) {
+      inflation_adjustment <- 1
+    } else if (inflation_adjustment > 3) {
+      inflation_adjustment <- 3
+    }
+    
+    # Step 3: Apply inflation adjustment to base benefit
+    adjusted_benefit <- base_benefit * (1 + inflation_adjustment / 100)
+    
+    # Return the adjusted benefit
+    return(adjusted_benefit)
+  }
+  
+  # Monte Carlo Simulation
+  set.seed(123)  # Set seed for reproducibility
+  simulation_results_trs <- numeric(num_simulations)
+  
+  for (sim in 1:num_simulations) {
+    # Simulate FAS (Final Average Salary) as a normal distribution
+    FAS <- rnorm(1, mean = initial_FAS, sd = 5000)  # Mean FAS and standard deviation
+    
+    # Simulate Years of Service (N) as a normal distribution (or you can use uniform)
+    N <- round(rnorm(1, mean = mean_years_served, sd = sd_years_served))
+    N <- max(N, 1)  # Ensure at least 1 year of service
+    
+    # Simulate CPI (Consumer Price Index) as a normal distribution
+    CPI <- rnorm(1, mean = mean_CPI, sd = sd_CPI)
+    
+    # Calculate the benefit for this simulation
+    benefit <- calculate_benefit(FAS, N, CPI)
+    
+    # Store the result of this simulation
+    simulation_results_trs[sim] <- benefit
+  }
+  
+  # Return simulation results (mean, standard deviation, and percentiles)
+  results_trs <- list(
+    mean = mean(simulation_results_trs),
+    sd = sd(simulation_results_trs),
+    min = min(simulation_results_trs),
+    max = max(simulation_results_trs),
+    p10 = quantile(simulation_results_trs, 0.10),
+    p90 = quantile(simulation_results_trs, 0.90)
+  )
+  
+  return(results_trs)
+}
+
+# Example Usage of Monte Carlo Simulation
+initial_FAS <- 90000     # Mean Final Average Salary
+mean_CPI <- 300          # Expected CPI (e.g., inflation rate)
+sd_CPI <- 10             # Standard deviation for CPI
+mean_years_served <- 20  # Mean number of years served
+sd_years_served <- 2     # Standard deviation for years served
+
+# Run Monte Carlo Simulation with 10,000 iterations
+simulation_trs_results <- monte_carlo_benefit_trs(initial_FAS, mean_CPI, sd_CPI, mean_years_served, sd_years_served, num_simulations = 200)
+
+# Assuming simulation_trs_results contains summary statistics
+simulation_trs_results <- list(
+  mean = 31587.42,
+  sd = 4174.008,
+  min = 22687.68,
+  max = 42848.84,
+  p10 = 26792.82,
+  p90 = 37691.25
+)
+
+# Divide each value in the results by 240
+simulation_trs_results_monthly <- lapply(simulation_trs_results, function(x) x / 12)
+
+# Convert the results into a data frame for easy viewing
+simulation_trs_results_table <- data.frame(
+  Statistic = names(simulation_trs_results_monthly),
+  Monthly_Value = unlist(simulation_trs_results_monthly)
+)
+
+
+```
+
+\`\`\`
+
+</details>
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Print the table
+print(simulation_trs_results_table)
+```
+
+##### ORP
+
+<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+
+\`\`\`r
+
+```{r warning=FALSE, message=FALSE}
+
+###MONTE CARLO FOR ORP
+# Load necessary library
+library(MASS)  # For simulating random variables (like salary increases and returns)
+
+# Define the function to calculate ORP savings with randomness (Monte Carlo Simulation)
+monte_carlo_orp_savings <- function(initial_salary, salary_increase_rate, years_at_cuny, starting_age, num_simulations = 200) {
+  
+  # Define the asset allocation and average returns for each period
+  asset_allocation <- list(
+    age_25_49 = c(US_Equities = 0.54, International_Equities = 0.36, Bonds = 0.10),
+    age_50_59 = c(US_Equities = 0.47, International_Equities = 0.32, Bonds = 0.21),
+    age_60_74 = c(US_Equities = 0.34, International_Equities = 0.23, Bonds = 0.43),
+    age_75_plus = c(US_Equities = 0.19, International_Equities = 0.13, Bonds = 0.62, Short_Term_Debt = 0.06)
+  )
+  
+  returns <- c(US_Equities = 0.07, International_Equities = 0.06, Bonds = 0.04, Short_Term_Debt = 0.02)
+  
+  # Function to compute contributions (same as before)
+  calc_contributions <- function(salary, years) {
+    contributions <- numeric(years)
+    for (year in 1:years) {
+      if (salary <= 45000) {
+        employee_contrib <- 0.03 * salary
+      } else if (salary <= 55000) {
+        employee_contrib <- 0.035 * salary
+      } else if (salary <= 75000) {
+        employee_contrib <- 0.045 * salary
+      } else if (salary <= 100000) {
+        employee_contrib <- 0.0575 * salary
+      } else {
+        employee_contrib <- 0.06 * salary
+      }
+      
+      if (year <= 7) {
+        employer_contrib <- 0.08 * salary
+      } else {
+        employer_contrib <- 0.10 * salary
+      }
+      
+      total_contrib <- employee_contrib + employer_contrib
+      contributions[year] <- total_contrib
+      salary <- salary * (1 + salary_increase_rate)  # Salary increases yearly
+    }
+    return(contributions)
+  }
+  
+  # Monte Carlo Simulation
+  set.seed(123)  # Set seed for reproducibility
+  simulation_results <- numeric(num_simulations)
+  
+  for (sim in 1:num_simulations) {
+    # Simulate the contribution and returns for each simulation
+    contributions <- calc_contributions(initial_salary, years_at_cuny)
+    
+    # Simulate returns as random variables (e.g., normal distribution with mean returns and standard deviation)
+    total_savings <- 0
+    current_age <- starting_age
+    
+    for (year in 1:years_at_cuny) {
+      # Determine the asset allocation based on age
+      if (current_age >= 75) {
+        allocation <- asset_allocation$age_75_plus
+      } else if (current_age >= 60) {
+        allocation <- asset_allocation$age_60_74
+      } else if (current_age >= 50) {
+        allocation <- asset_allocation$age_50_59
+      } else {
+        allocation <- asset_allocation$age_25_49
+      }
+      
+      # Simulate the growth rate by drawing random values for returns based on a normal distribution
+      simulated_growth_rate <- sum(allocation * rnorm(length(returns), mean = returns, sd = 0.02))  # Small standard deviation for randomness
+      total_savings <- total_savings * (1 + simulated_growth_rate) + contributions[year]
+      
+      # Increase the age by 1 year
+      current_age <- current_age + 1
+    }
+    
+    # Store the result of this simulation
+    simulation_results[sim] <- total_savings
+  }
+  
+  # Return simulation results (mean, standard deviation, and percentiles)
+  results <- list(
+    mean = mean(simulation_results),
+    sd = sd(simulation_results),
+    min = min(simulation_results),
+    max = max(simulation_results),
+    p10 = quantile(simulation_results, 0.10),
+    p90 = quantile(simulation_results, 0.90)
+  )
+  
+  return(results)
+}
+
+# Example Usage of Monte Carlo Simulation
+initial_salary <- 65000
+salary_increase_rate <- 0.03  # 3% annual increase in salary
+years_at_cuny <- 20           # Employee works 20 years at CUNY
+starting_age <- 25            # Start at age 25
+
+# Run Monte Carlo Simulation with 10,000 iterations
+simulation_results <- monte_carlo_orp_savings(initial_salary, salary_increase_rate, years_at_cuny, starting_age, num_simulations = 200)
+
+# Display the results
+view(simulation_results)
+
+# Assuming simulation_results contains summary statistics
+simulation_results <- list(
+  mean = 505804.1,
+  sd = 19940.14,
+  min = 450809.8,
+  max = 571327.3,
+  p10 = 482795.2,
+  p90 = 531700.4
+)
+
+# Convert total results to monthly results by dividing by 240 months
+simulation_results_monthly <- lapply(simulation_results, function(x) x / 240)
+
+# Convert the list into a data frame for easy viewing
+simulation_results_table <- data.frame(
+  Statistic = names(simulation_results_monthly),
+  Monthly_Value = unlist(simulation_results_monthly)
+)
+
+```
+
+\`\`\`
+
+</details>
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+# Print the table
+print(simulation_results_table)
+
+```
+
+Regardless of the outcomes and end benefits for both. I have already made a decision based on economic analysis from FRED and ALPHA historical data. Nothing is certain is my conclusion, and since I'm not looking to be rich but rather just live comfortably enjoying time with family, frugally, I will choose the TRS benefit; the benefit for life. Perhaps on the side saving/investing for my health bills will do good, unless of course healthcare becomes FREE - then in that case I have nothing more to say that WONDERFUL!!
+
+![RETIREMENT HERE I COME](https://i.gifer.com/3cu3.gif)
