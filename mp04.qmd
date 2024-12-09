@@ -1,5 +1,6 @@
 ---
 title: "mp04"
+editor: visual
 format: html
 theme: sandstone
 ---
@@ -47,7 +48,11 @@ library(httr2)
 library(ggplot2)
 ```
 
-<details><summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR ALPHA DATA</strong></summary>\</summary\>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR ALPHA DATA</strong></summary>
+
+\</summary\>
 
 \`\`\` r
 
@@ -145,7 +150,9 @@ observations_stdr_df <- data.frame(
 
 </details>
 
-<details><summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR **ALPHA DATA**</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR EXTRACTING AND CREATING DATA FRAME FOR **ALPHA DATA**</strong></summary>
 
 \`\`\`r
 
@@ -246,7 +253,9 @@ I will now dive into my initial economic analysis based on the metrics described
 
 ##### **S&P 500 as *US equity data***
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH S&P500_US EQUITY - Monthly Average High and Low Values</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH S&P500_US EQUITY - Monthly Average High and Low Values</strong></summary>
 
 \`\`\`r
 
@@ -328,7 +337,7 @@ ssplot <- ggplot(monthly_avg_high_low, aes(x = month, y = value, color = metric)
 
 ```
 
-![Alt text](S&P MP4.PNG)
+![Alt text](S&P%20MP4.PNG)
 
 I am using the S&P 500 to portray US Equity. The S&P 500 index reflects the 500 largest publicly traded companies in the US., spanning from industries such as healthcare, finance, consumer goods, and energy. I can conclude that the better the S&P performs the better it reflects US equity. In other words an upward trend = growth, downward trend = difficulties.
 
@@ -338,7 +347,9 @@ To conclude on this graph, US equity looks fantastico in a longer time span and 
 
 ##### 10 Treasury Yield as *Bond Market total returns data*
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH 10 Year Treasury Bond Yield; Bond Market Returns - Monthly Average % values</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH 10 Year Treasury Bond Yield; Bond Market Returns - Monthly Average % values</strong></summary>
 
 \`\`\`r
 
@@ -407,7 +418,7 @@ tenyear_plot <- ggplot(monthly_bondavg_plotdata, aes(x = month, y = value, color
  print(tenyear_plot)
 ```
 
-![This is an image](10 year treasury bond mp4.PNG)
+![This is an image](10%20year%20treasury%20bond%20mp4.PNG)
 
 For this graph I have the 10 year Treasury Bond reflecting Bond Market returns over time. The 10 year Treasury Bond Yield is the percent interest paid by government for borrowed money for 10 years. The higher the % interest the more money payed back to investors/lenders the better. As it is government backed, it is considered a safe investment.
 
@@ -419,7 +430,9 @@ So it looks like confidence for investors is growing from 2020 on, perhaps from 
 
 ##### Real GDP as *Wage Growth data*
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH Real GDP; Wage Growth - Monthly Average Billion \$s</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH Real GDP; Wage Growth - Monthly Average Billion \$s</strong></summary>
 
 \`\`\`r
 
@@ -495,7 +508,9 @@ So, I can safely say that because Real GDP has been rising , wages will also con
 
 ##### CPI as *Inflation Data*
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly CPI (Consumer Price Index) Over Time as INFLATION</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly CPI (Consumer Price Index) Over Time as INFLATION</strong></summary>
 
 \`\`\`r
 
@@ -566,7 +581,9 @@ To conclude here, inflation will kill my savings. Perhaps if it falls below the 
 
 ##### International Stock market as *International Equity Market total returns data*
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly International Stock Market Avg. Value Over Time</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH - Monthly International Stock Market Avg. Value Over Time</strong></summary>
 
 \`\`\`r
 
@@ -639,7 +656,9 @@ I will conclude that investing in international markets will diversify my invest
 
 ##### US Monthly Treasury Yields as *Short Term Debt Returns*
 
-<details><summary><strong>CLICK TO VIEW CODE FOR GRAPH - US Monthly Treasury Yield % ; Short Term Debt Returns Over Time</strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE FOR GRAPH - US Monthly Treasury Yield % ; Short Term Debt Returns Over Time</strong></summary>
 
 \`\`\`r
 
@@ -718,7 +737,9 @@ After Economy analysis I will now calculate monthly Benefits for the TRS plan an
 
 I'll First calculate TRS. I will keep in mind that TRS benefit is a pension benefit. When it's time for me to retire I will receive a check at/near monthly equal amounts for the remainder of my life \[till death.\] The downside of this is that once it's time for me to retire, and should markets perform higher hence provide higher returns, I will not reap those benefits. It's one stable check market win or loose.
 
-<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE </strong></summary>
 
 \`\`\`r
 
@@ -778,7 +799,9 @@ print(benefit)
 
 I will now explore ORP monthly benefits. The ORP benefit is like a 401k, so if markets are performing well in my retirement then I potentially have greater monthly benefits or maybe longer benefits. I must keep in mind this is not forever \[till death\], so it's important to invest well as well as to be cognizant of how much I will extract yearly for whatever number of years I think I will continue to live after retirement. So I guess one of the bigger downside is this plan will keep me alert on the number of years I will be alive - jaja. I also have a risk of markets not performing well. Unless of course I'm an excellent money manager and investor. In any case let's look at the numbers. Here are my monthly benefits :
 
-<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE </strong></summary>
 
 \`\`\`r
 
@@ -889,7 +912,9 @@ So I want to have more confidence of my future returns. I will now apply the Mon
 
 ##### TRS
 
-<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE </strong></summary>
 
 \`\`\`r
 
@@ -1008,7 +1033,9 @@ print(simulation_trs_results_table)
 
 ##### ORP
 
-<details><summary><strong>CLICK TO VIEW CODE </strong></summary>
+<details>
+
+<summary><strong>CLICK TO VIEW CODE </strong></summary>
 
 \`\`\`r
 
