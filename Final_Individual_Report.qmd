@@ -42,7 +42,7 @@ To begin we had to research and find legitimate data sources for mortgages in th
 
 For stage 2 analysis HMDA data sufficed, although there was an API available, API was not used to extract data due to API filter types & formating , and timing. The size of our data allowed us to download 2018-2023 files and read as CSV. You can view [GIT FILE](https://github.com/Malexandra-Jerez/STA9750-2024-FALL/blob/main/HMD.R) for full HMDA data extract code. Additionally you can view our [CENSUS DATA EXTRACT CODE](https://github.com/ayrama/broker-team9-mortgage-analysis/blob/main/temp.qmd) as needed.
 
-One of the biggest challenges was combining both extracted data, however, teamwork made the dream work and managed to combine data.
+One of the biggest challenges was combining both extracted data, however, teamwork made the dream work and we managed to combine data.
 
 ## Analysis Results
 
@@ -72,7 +72,3 @@ As you will see from data analysis in GROUP FINAL REPORT, we find a point where 
 ## Conclusion
 
 DEMO is a controversial set of data to analyse. More so now in such a polarized state of humanity, where civilization is crying for equality and equity from the top of their lungs. But perhaps it is one of the most important sets of data to analyse, to fix a system that has been broken, and help lead a better path, at this point of inflection, that civilization is walking through.
-
-```{r}
-setwd("C:/Users/Alex/Documents/STA9750-2024-FALL")
-```
