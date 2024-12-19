@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -186,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <p><strong>Extracting data and reading into RStudio:</strong></p>
 <p>For stage 2 analysis HMDA data sufficed, although there was an API available, API was not used to extract data due to API filter types &amp; formating , and timing. The size of our data allowed us to download 2018-2023 files and read as CSV. You can view <a href="https://github.com/Malexandra-Jerez/STA9750-2024-FALL/blob/main/HMD.R">GIT FILE</a> for full HMDA data extract code. Additionally you can view our <a href="https://github.com/ayrama/broker-team9-mortgage-analysis/blob/main/temp.qmd">CENSUS DATA EXTRACT CODE</a> as needed.</p>
-<p>One of the biggest challenges was combining both extracted data, however, teamwork made the dream work and managed to combine data.</p>
+<p>One of the biggest challenges was combining both extracted data, however, teamwork made the dream work and we managed to combine data.</p>
 </section>
 <section id="analysis-results" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-results">Analysis Results</h2>
@@ -229,9 +195,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>DEMO is a controversial set of data to analyse. More so now in such a polarized state of humanity, where civilization is crying for equality and equity from the top of their lungs. But perhaps it is one of the most important sets of data to analyse, to fix a system that has been broken, and help lead a better path, at this point of inflection, that civilization is walking through.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/Alex/Documents/STA9750-2024-FALL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
 </section>
