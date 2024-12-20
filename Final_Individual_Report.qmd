@@ -20,7 +20,7 @@ Our group , the Broker T's, looked into the Shift of Mortgages Pre, During, Post
 
 **Data Sources:**
 
-To begin we had to research and find legitimate data sources for mortgages in the U.S. Below you will see the data sources used, for full description of data sources you can access GROUP FINAL REPORT. We filtered and narrowed down to N.Y. state data only.
+To begin we had to research and find legitimate data sources for mortgages in the U.S. Below you will see the data sources used, for full description of data sources you can access [GROUP FINAL REPORT](https://laurencardieri.github.io/STA9750-2024-FALL/Team9Final.html). We filtered and narrowed down to N.Y. state data only.
 
 **Consumer Financial Protection Bureau**
 
@@ -55,7 +55,7 @@ One of the biggest questions was to find where equity fell in the mortgage equat
 3.  What are the interest rates by race? Does one benefit more than the others?
 4.  What are the average income distributions by race? Does one benefit more than the others?
 
-The below graphs were the results of this analysis. For full analysis explanation you can view GROUP FINAL REPORT.
+The below graphs were the results of this analysis. For full analysis explanation you can view [GROUP FINAL REPORT](https://laurencardieri.github.io/STA9750-2024-FALL/Team9Final.html).
 
 ![Loan Type by Race](1.png)
 
